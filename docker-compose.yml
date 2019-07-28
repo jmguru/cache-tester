@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  node-app:
+    image: node-app
+    container_name: serverapp
+    hostname: serverapp
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - NOTHING=0
+    ports:
+      - "3030:3030"
+    networks:
+      - redis-net
+  redis-client:
+    image: redis
+    hostname: redis-client
+    networks:
+      - redis-net
+  redis-svr:
+    image: redis
+    hostname: redis-svr
+    networks:
+      - redis-net
+
+networks:
+  redis-net:
