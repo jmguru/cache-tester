@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodeapp-pod
+  labels:
+    app: node-app
+spec:
+  hostNetwork: true
+  containers:
+  - name: serverapp
+    image: mycluster.icp:8500/demoicp/node-app:latest
+    imagePullPolicy: Always
+    ports:
+      - containerPort: 3030
+        hostPort: 3030
+  - name: redis-svr
+    image: redis:latest
+    imagePullPolicy: Always
+    ports:
+      - containerPort: 6379
+        hostPort: 6379
+  imagePullSecrets:
+  - name: myregistrykey

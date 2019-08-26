@@ -2,7 +2,7 @@ version: '3'
 
 services:
   node-app:
-    image: node-app
+    image: demoicp/node-app:latest
     container_name: serverapp
     hostname: serverapp
     restart: unless-stopped
@@ -13,14 +13,11 @@ services:
       - "3030:3030"
     networks:
       - redis-net
-  redis-client:
-    image: redis
-    hostname: redis-client
-    networks:
-      - redis-net
   redis-svr:
     image: redis
     hostname: redis-svr
+    ports:
+      - "6375:6375"
     networks:
       - redis-net
 
